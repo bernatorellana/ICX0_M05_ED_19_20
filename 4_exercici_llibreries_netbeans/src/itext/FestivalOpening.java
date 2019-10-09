@@ -26,9 +26,9 @@ public class FestivalOpening {
 
     /** The resulting PDF. */
     public static final String RESULT
-        = "results/part1/chapter03/festival_opening.pdf";
+        = "festival_opening.pdf";
     /** The movie poster. */
-    public static final String RESOURCE = "resources/img/loa.jpg";
+   // public static final String RESOURCE = "resources/img/loa.jpg";
 
     /**
      * Main method.
@@ -38,6 +38,10 @@ public class FestivalOpening {
      */
     public static void main(String[] args)
         throws IOException, DocumentException {
+        
+        String RESOURCE = args[0];
+        
+        
     	// step 1
         Document document = new Document(PageSize.POSTCARD, 30, 30, 30, 30);
         // step 2
