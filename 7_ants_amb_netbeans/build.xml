@@ -51,14 +51,46 @@
     -->
     <target name="0_Fer backup" 
         depends="init"
-            description="Fer el backup mensual">
-        
+            description="Fer el backup mensual"            
+    >
+        <antcall target="compile"></antcall>
         <echo message="Estic fent backup (fake!)"></echo>        
         <property file="etc/FTP.config"></property>
         <echo message="${FTP.user}"/>
         <echo message="${FTP.password}"/>
         <echo message="${FTP.IP}"/>
         <echo message="${dist.jar}"/>
+        <!-- ****************************** -->
+        <property name="backup_folder" value="backup" ></property>
+        <mkdir dir="${backup_folder}" ></mkdir>
+        <copy todir="${backup_folder}">
+            <fileset dir="${src.dir}"/>
+            <!--fileset dir="lib"/-->
+        </copy>
+     
+        <!-- zip -->
+        <zip destfile="backup.zip"
+            basedir="${backup_folder}"/>
+        <!--delete>
+            <fileset dir="${backup_folder}" includes="**/*.*"/>
+        </delete-->
+        <delete dir="${backup_folder}"></delete>
+        <mkdir dir="${backup_folder}" ></mkdir>
+        <move file="backup.zip" tofile="${backup_folder}\backup.zip"/>
+        <!-- Enviem un FTP -->
+        <ftp server="${FTP.IP}"
+            port="${FTP.port}"
+            remotedir="/DEIXAR/DAM2"
+            userid="${FTP.user}"
+            password="${FTP.password}"
+            passive="yes"
+            depends="yes"
+            binary="yes">
+           <fileset dir="${backup_folder}">
+               <include name="backup.zip"/>
+           </fileset>
+       </ftp>
+        
     </target>
     
     
