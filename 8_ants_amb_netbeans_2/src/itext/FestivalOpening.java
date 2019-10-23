@@ -1,10 +1,3 @@
-/*
- * This class is part of the book "iText in Action - 2nd Edition"
- * written by Bruno Lowagie (ISBN: 9781935182610)
- * For more info, go to: http://itextpdf.com/examples/
- * This example only works with the AGPL version of iText.
- */
-
 package itext;
 
 import java.io.FileOutputStream;
@@ -25,7 +18,7 @@ import com.itextpdf.text.pdf.PdfWriter;
 public class FestivalOpening {
 
     /** The resulting PDF. */
-    public static final String RESULT
+    public static  String RESULT
         = "festival_opening.pdf";
     /** The movie poster. */
    // public static final String RESOURCE = "resources/img/loa.jpg";
@@ -40,7 +33,7 @@ public class FestivalOpening {
         throws IOException, DocumentException {
         
         String RESOURCE = args[0];
-        
+        RESULT = RESOURCE+".pdf";
         
     	// step 1
         Document document = new Document(PageSize.POSTCARD, 30, 30, 30, 30);

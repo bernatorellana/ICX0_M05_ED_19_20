@@ -10,6 +10,83 @@
 <project name="DemoPdf" default="default" basedir=".">
     <description>Builds, tests, and runs the project DemoPdf.</description>
     <import file="nbproject/build-impl.xml"/>
+    
+    <taskdef resource="net/sf/antcontrib/antcontrib.properties">
+        <classpath>
+            <pathelement location="lib/ant-contrib-1.0b3.jar"/>
+        </classpath>
+    </taskdef>
+    
+    <target name="1_SuperDuperJar" description="Fer un super jar de la muerte"
+        depends="jar"
+    >
+        <jar destfile="${dist.jar}" update="true">
+            <zipgroupfileset dir="lib" includes="**/*.jar"/>
+        </jar>
+        
+    </target>
+    
+    <target name="2_foreach" description="xxx" depends="1_SuperDuperJar" >
+        <foreach target="generarPdf" param="fileName" >
+            <fileset dir="imatges" includes="**/*.jpg"/>
+        </foreach>
+    </target>
+    
+    <target name="generarPdf" depends="init">   
+        <echo message="${fileName}"></echo>
+        
+        <basename property="fileNameReduit" file="${fileName}"></basename>
+        <echo message="${fileNameReduit}"></echo>
+        <java classname="itext.FestivalOpening" dir="imatges">
+            <arg value="${fileNameReduit}"/>
+            <classpath>
+                <pathelement path="dist/DemoPdf.jar"/>
+            </classpath>
+        </java>      
+    </target>
+        
+    
+    
+    <target name="0_Executa aplicació" description="Executa aplicació"
+            depends="compile"
+    >
+        <input message="Quina opció vols?" validargs="Hello World PDF,PDF amb imatge"
+               defaultvalue="Hello World PDF" addproperty="opcio">
+        </input>
+        <if>
+            <equals arg1="${opcio}" arg2="Hello World PDF" ></equals>
+            <then>
+                <echo message="opcio 1"></echo>
+                <echo message="${run.classpath}"></echo>
+                
+                <java classname="itext.HelloWorld">
+                    <!--arg value="-h"/-->
+                    <classpath>
+                        <pathelement path="${run.classpath}"/>
+                    </classpath>
+                </java>
+                
+            </then>
+            <else>
+                <echo message="opcio 2"></echo>
+                <input message="Introduiu el nom de la imatge" 
+                defaultvalue=".jpg"
+                       addproperty="imatge">
+                </input>
+                <java classname="itext.FestivalOpening">
+                    <arg value="${imatge}"/>
+                    <classpath>
+                        <pathelement path="${run.classpath}"/>
+                    </classpath>
+                </java>                
+            </else>
+        </if>
+        
+    </target>
+    
+    
+    
+    
     <!--
 
     There exist several targets which are by default empty and which can be 
