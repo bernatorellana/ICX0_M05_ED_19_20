@@ -97,6 +97,33 @@
             </then>
             <else>
                 <echo message="OPCIO Test Múltiple"></echo>
+                <!-- =========================================================== -->
+                <!-- 1. Carregeu la informació que hi ha a l’arxiu de propietats “servers.conf” -->
+                <property file="servers.conf"></property>
+                <echo message="${TEST_SERVER_URL}"></echo>
+                <!-- 2. Creeu una carpeta “downloads” -->
+                <mkdir dir="downloads"></mkdir>
+                <!-- 3. Amb la tasca <get> descarregueu a “downloads” 
+                
+                l’arxiu que hi ha a la URL que correspon a la propietat 
+                TEST_SERVER_URL de servers.conf. -->
+                <get src="${TEST_SERVER_URL}" dest="downloads"/> 
+                
+                   
+                <!-- 4. Descomprimiu l’arxiu, i obtindreu múltiples arxius *.png i *.txt -->
+                <unzip src="downloads/full_tests.zip" dest="downloads"/>
+                
+                
+                <!-- 5. Per cada arxiu png (tots contenen QRs), 
+                decodifiqueu-lo. 
+                Si l’arxiu png s’anomena “test1.png”,
+                deseu el resultat a “test1.decoded.txt”. -->
+                
+                
+                
+                
+                <!-- 6. Compareu “test1.decoded.txt” amb “test1.txt” (el missatge original) usant el truc dels <checksum>. Si qualsevol dels testos no és correcte, feu fallar el test, altrament l’script mostra un “Tots els testos superats.” a l’acabar. Caldrà usar <basename> -->
+                
             </else>
                 
         </if>
