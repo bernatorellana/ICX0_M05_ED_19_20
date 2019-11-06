@@ -42,7 +42,7 @@
         <!-- Cal que asseguri tenir el jar de l’aplicació.. -->
         <!--antcall target="jar"></antcall-->
         <!-- Mostrarà un splash screen amb un missatge : “Testejant QR”.-->
-        <splash displayText="Testejant QR"></splash>
+        <!--splash displayText="Testejant QR"></splash-->
         <!--
         Ens ha de donar a triar entre dues opcions: “Test bàsic” i “Test múltiple”-->
         <input validargs="Test bàsic,Test múltiple" addproperty="opcio"></input>
@@ -107,29 +107,65 @@
                 
                 l’arxiu que hi ha a la URL que correspon a la propietat 
                 TEST_SERVER_URL de servers.conf. -->
+               
+               <!--
                 <get src="${TEST_SERVER_URL}" dest="downloads"/> 
-                
-                   
+                -->
+                  
                 <!-- 4. Descomprimiu l’arxiu, i obtindreu múltiples arxius *.png i *.txt -->
+                
                 <unzip src="downloads/full_tests.zip" dest="downloads"/>
                 
-                
+              
                 <!-- 5. Per cada arxiu png (tots contenen QRs), 
                 decodifiqueu-lo. 
                 Si l’arxiu png s’anomena “test1.png”,
                 deseu el resultat a “test1.decoded.txt”. -->
-                
-                
-                
-                
-                <!-- 6. Compareu “test1.decoded.txt” amb “test1.txt” (el missatge original) usant el truc dels <checksum>. Si qualsevol dels testos no és correcte, feu fallar el test, altrament l’script mostra un “Tots els testos superats.” a l’acabar. Caldrà usar <basename> -->
-                
+       
+                <foreach target="executaDecodificacio" param="arxiu">
+                    <param name="run.classpath" value="${run.classpath}"></param>
+                    <fileset dir="downloads" includes="**/*.png"></fileset>
+                </foreach>
+                <echo message="Tot ha anat bé."></echo>
+ 
             </else>
                 
         </if>
         
     </target>
     
+    <target name="executaDecodificacio">
+        <basename file="${arxiu}" property="nom" suffix=".png"></basename>
+        <echo message="${nom}"></echo>
+        
+        <java classname="zxingclient.QRDecoder">
+           <arg value="downloads/${nom}.png"/>
+           <arg value="downloads/${nom}.decoded.txt"/> <!-- per cada paràmetre posem un args-->                  
+          <classpath >
+            <pathelement path="${run.classpath}"/>
+          </classpath>
+        </java>         
+
+        <!-- 6. Compareu “test1.decoded.txt” amb “test1.txt” 
+        (el missatge original) usant el truc dels <checksum>.
+        Si qualsevol dels testos no és correcte, feu fallar el test, altrament 
+        l’script mostra un “Tots els testos superats.” a l’acabar. Caldrà usar <basename> -->
+        <checksum file="downloads/${nom}.decoded.txt" property="DECODED_MD5"/>
+        <checksum file="downloads/${nom}.txt" property="ORIGINAL_MD5"/>
+        <echo message="${ORIGINAL_MD5}"></echo>
+        <echo message="${DECODED_MD5}"></echo>
+                
+        <if>
+            <not>
+                <equals arg1="${ORIGINAL_MD5}" arg2="${DECODED_MD5}"></equals>
+            </not>
+            <then>
+                <echo message="Arxius diferents"></echo>
+                <fail message="El test ha fallat"></fail>                            
+            </then>
+        </if>
+    </target>    
+  
     
     
     <!--
