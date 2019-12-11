@@ -11,25 +11,19 @@ package bueling;
  */
 public class Bueling {
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        // TODO code application logic here
+    
+    
+    
+    public float getSobrecostPerEquipatge( 
+                           int midaEquipatgeMaCm[],  
+                          int pesEquipatgeMa, 
+                          int pesMaletes[], 
+                          boolean pagaAmbTarja){
         
         
-        int taula[];
-        /// que val taula ?
- //       taula.length;// NullPointerException
-        int taula2[] = new int[23];
-        
-        int taula3[] = new int[0];
-        
-
-        
-        
-        
-        
+        return 12;
     }
+
+     
     
 }
