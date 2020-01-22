@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>TheHouseOfIfs.java</title>
+  <meta http-equiv='Content-Type' content='text/html; charset=UTF-8'/>
+  <link rel='stylesheet' type='text/css' href='../coverage.css'/>
+  <link rel='shortcut icon' type='image/png' href='../logo.png'/>
+  <script type='text/javascript' src='../coverage.js'></script>
+  <script type='text/javascript' src='../prettify.js'></script>
+</head>
+<body onload='prettyPrint()'>
+  <table cellpadding='0' cellspacing='1'>
+    <caption>7_TheHoseOfIfs\src\capsa_blanca\TheHouseOfIfs.java</caption>
+    <tr>
+      <td class='line'>1</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>package capsa_blanca;</pre></td>
+    </tr>
+    <tr><td class='line'></td><td colspan='2'>&nbsp;</td></tr>
+    <tr>
+      <td class='line'></td><td>&nbsp;</td>
+      <td class='comment' onclick='showHideLines(this)'><div>/**
+ *
+ * @author bernat
+ */</div><span>/*...*/</span></td>
+    </tr>
+    <tr>
+      <td class='line'>7</td><td class='count'>1</td>
+      <td><pre class='prettyprint covered' id='l7s0'>public class TheHouseOfIfs {</pre></td>
+    </tr>
+    <tr><td class='line'></td><td colspan='2'>&nbsp;</td></tr>
+    <tr>
+      <td class='line'>9</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>    public int theScrambler( int [] numbers, String name ){</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>10</td><td class='count'>9</td>
+      <td><pre class='prettyprint jmp'>        <span id='l10s0' title='Executions: 9' class='covered'>if(name==null)</span> <span id='l10s1' title='Executions: 1' class='covered'>return -1;</span></pre></td>
+    </tr>
+    <tr>
+      <td class='line'>11</td><td class='count'>8</td>
+      <td><pre class='prettyprint jmp'>        <span id='l11s0' title='Executions: 8' class='covered'>if(numbers==null)</span> <span id='l11s1' title='Executions: 1' class='covered'>return -1;</span></pre></td>
+    </tr>
+    <tr>
+      <td class='line'>12</td><td class='count'>7</td>
+      <td><pre class='prettyprint jmp'>        <span id='l12s0' title='Executions: 7' class='covered'>if(numbers.length!=name.length())</span> <span id='l12s1' title='Executions: 1' class='covered'>return -1;</span></pre></td>
+    </tr>
+    <tr>
+      <td class='line'>13</td><td class='count'>6</td>
+      <td><pre class='prettyprint jmp'>        <span id='l13s0' title='Executions: 6' class='covered'>if(numbers.length==0)</span> <span id='l13s1' title='Executions: 1' class='covered'>return -1;</span></pre></td>
+    </tr>
+    <tr><td class='line'></td><td colspan='2'>&nbsp;</td></tr>
+    <tr>
+      <td class='line'>15</td><td class='count'>5</td>
+      <td><pre class='prettyprint covered' id='l15s0'>        String newName="";</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>16</td><td class='count'>5</td>
+      <td><pre class='prettyprint covered' id='l16s0'>        int [] stats = new int[name.length()];</pre></td>
+    </tr>
+    <tr><td class='line'></td><td colspan='2'>&nbsp;</td></tr>
+    <tr>
+      <td class='line'>19</td><td class='count'>20</td>
+      <td><pre class='prettyprint jmp'>        <span id='l19s0' title='Executions: 20' class='covered'>for(int i=0</span>;i&lt;stats.length;i++){</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>20</td><td class='count'>15</td>
+      <td><pre class='prettyprint covered' id='l20s0'>            stats[i]=0;</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>21</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>        }</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>22</td><td>&nbsp;</td>
+      <td><pre class='comment'>        // check numbers</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>23</td><td class='count'>18</td>
+      <td><pre class='prettyprint jmp'>        <span id='l23s0' title='Executions: 18' class='covered'>for(int i=0</span>;<span id='l23s1' title='Executions: 14' class='covered'>i&lt;numbers.length</span>;i++){</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>24</td><td class='count'>14</td>
+      <td><pre class='prettyprint jmp'>            <span id='l24s0' title='Executions: 14' class='covered'>if(numbers[i]>=name.length())</span> <span id='l24s1' title='Executions: 1' class='covered'>return -1;</span></pre></td>
+    </tr>
+    <tr>
+      <td class='line'>25</td><td class='count'>13</td>
+      <td><pre class='prettyprint covered' id='l25s0'>            stats[numbers[i]]++;</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>26</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>        }        </pre></td>
+    </tr>
+    <tr>
+      <td class='line'>27</td><td class='count'>14</td>
+      <td><pre class='prettyprint jmp'>        <span id='l27s0' title='Executions: 14' class='covered'>for(int i=0</span>;i&lt;stats.length;i++){</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>28</td><td class='count'>11</td>
+      <td><pre class='prettyprint jmp'>            <span id='l28s0' title='Executions: 11' class='covered'>if(stats[i]>1)</span> <span id='l28s1' title='Executions: 1' class='covered'>return -1;</span></pre></td>
+    </tr>
+    <tr>
+      <td class='line'>29</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>        }</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>30</td><td>&nbsp;</td>
+      <td><pre class='comment'>        //do some tricky work</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>31</td><td class='count'>12</td>
+      <td><pre class='prettyprint jmp'>        <span id='l31s0' title='Executions: 12' class='covered'>for(int i=0</span>;<span id='l31s1' title='Executions: 9' class='covered'>i&lt;numbers.length</span>;i++){</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>32</td><td class='count'>9</td>
+      <td><pre class='prettyprint covered' id='l32s0'>            newName += name.charAt(numbers[i]);</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>33</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>        }</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>34</td><td>&nbsp;</td>
+      <td><pre class='comment'>        // check results</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>35</td><td class='count'>3</td>
+      <td><pre class='prettyprint covered' id='l35s0'>        boolean eq=true;</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>36</td><td class='count'>6</td>
+      <td><pre class='prettyprint jmp'>        <span id='l36s0' title='Executions: 6' class='covered'>for(int i=0</span>;<span id='l36s1' title='Executions: 1' class='covered'>i&lt;name.length();i++)</span><span id='l36s2' title='Executions: 5' class='covered'>{</span></pre></td>
+    </tr>
+    <tr>
+      <td class='line'>37</td><td class='count'>5</td>
+      <td><pre class='prettyprint jmp'>            <span id='l37s0' title='Executions: 5' class='covered'>if(name.charAt(i)!=newName.charAt(i))</span>{</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>38</td><td class='count'>2</td>
+      <td><pre class='prettyprint covered' id='l38s0'>                eq=false;</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>39</td><td class='count'>2</td>
+      <td><pre class='prettyprint covered' id='l39s0'>                break;</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>40</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>            }</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>41</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>        }</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>42</td><td class='count'>3</td>
+      <td><pre class='prettyprint jmp'>        <span id='l42s0' title='Executions: 3' class='covered'>if(!eq)</span>{</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>43</td><td class='count'>2</td>
+      <td><pre class='prettyprint covered' id='l43s0'>            eq=true;</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>44</td><td class='count'>6</td>
+      <td><pre class='prettyprint jmp'>            <span id='l44s0' title='Executions: 6' class='covered'>for(int i=0</span>;<span id='l44s1' title='Executions: 1' class='covered'>i&lt;name.length();i++)</span><span id='l44s2' title='Executions: 5' class='covered'>{</span></pre></td>
+    </tr>
+    <tr>
+      <td class='line'>45</td><td class='count'>5</td>
+      <td><pre class='prettyprint jmp'>                <span id='l45s0' title='Executions: 5' class='covered'>if(name.charAt(name.length()-i-1)!=newName.charAt(i))</span>{</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>46</td><td class='count'>1</td>
+      <td><pre class='prettyprint covered' id='l46s0'>                    eq=false;</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>47</td><td class='count'>1</td>
+      <td><pre class='prettyprint covered' id='l47s0'>                    break;</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>48</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>                }</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>49</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>            }    </pre></td>
+    </tr>
+    <tr>
+      <td class='line'>50</td><td class='count'>2</td>
+      <td><pre class='prettyprint jmp'>            <span id='l50s0' title='Executions: 2' class='covered'>if(!eq)</span>{</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>51</td><td class='count'>1</td>
+      <td><pre class='prettyprint covered' id='l51s0'>                return 1;</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>52</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>            } else {</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>53</td><td class='count'>1</td>
+      <td><pre class='prettyprint covered' id='l53s0'>                return 2;</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>54</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>            }</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>55</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>        } else {</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>56</td><td class='count'>1</td>
+      <td><pre class='prettyprint covered' id='l56s0'>            return 0;</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>57</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>        }</pre></td>
+    </tr>
+    <tr><td class='line'></td><td colspan='2'>&nbsp;</td></tr>
+    <tr>
+      <td class='line'>59</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>    }</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>60</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>}</pre></td>
+    </tr>
+  </table>
+</body>
+</html>
