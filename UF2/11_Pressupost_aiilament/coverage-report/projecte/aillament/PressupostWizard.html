@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>JMockit Coverage Report - PressupostWizard.java</title>
+  <meta http-equiv='Content-Type' content='text/html; charset=UTF-8'/>
+  <link rel='stylesheet' type='text/css' href='../../coverage.css'/>
+  <link rel='shortcut icon' type='image/png' href='../../logo.png'/>
+  <script type='text/javascript' src='../../coverage.js'></script>
+  <script type='text/javascript' src='../../prettify.js'></script>
+</head>
+<body onload='prettyPrint()'>
+  <table cellpadding='0' cellspacing='1'>
+    <caption>11_Pressupost_aiilament\src\projecte\aillament\PressupostWizard.java</caption>
+    <tr>
+      <td class='line'>1</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>package projecte.aillament;</pre></td>
+    </tr>
+    <tr><td class='line'></td><td colspan='2'>&nbsp;</td></tr>
+    <tr>
+      <td class='line'></td><td>&nbsp;</td>
+      <td class='comment' onclick='showHideLines(this)'><div>/**
+ * Confecciona pressupostos
+ * @author bernat
+ */</div><span>/*...*/</span></td>
+    </tr>
+    <tr>
+      <td class='line'>7</td><td class='count'>1</td>
+      <td><pre class='prettyprint covered' id='l7s0'>public class PressupostWizard {</pre></td>
+    </tr>
+    <tr><td class='line'></td><td colspan='2'>&nbsp;</td></tr>
+    <tr>
+      <td class='line'></td><td>&nbsp;</td>
+      <td class='comment' onclick='showHideLines(this)'><div>    /**
+     * 
+     * @param codisProducte taula que conté codis de producte dels que es destija obtenir pressupost.
+     * @param unitatsProducte taula que conté les unitats demanades dels productes de la taula anterior.
+     * @return una cadena amb el text del pressupost.
+     * @throws Exception 
+     */</div><span>    /*...*/</span></td>
+    </tr>
+    <tr>
+      <td class='line'>17</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>    public String getPressupost( int codisProducte[] , int unitatsProducte[]) throws Exception{</pre></td>
+    </tr>
+    <tr>
+      <td></td><td class='count'>1</td>
+      <td class='paths'>
+        <span style='cursor:default; background-color:#aa5500' onclick='hidePath()'>Path coverage: 1/3</span>
+        <span class='uncovered' onclick="showPath(this,'l18s0 l21s0 l41s0')">A: 0</span>
+        <span class='covered' onclick="showPath(this,'l18s0 l21s0 l23s0 l31s0 l34s0 l38s0 l39s0 l41s0')">B: 1</span>
+        <span class='uncovered' onclick="showPath(this,'l18s0 l21s0 l23s0 l31s0 l32s0 l38s0 l39s0 l41s0')">C: 0</span>
+      </td>
+    </tr>
+    <tr>
+      <td class='line'>18</td><td class='count'>1</td>
+      <td><pre class='prettyprint covered' id='l18s0'>        String pressupost="";</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>19</td><td>&nbsp;</td>
+      <td><pre class='comment'>        //GestorProductes gm = new GestorProductes();</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>20</td><td class='count'>1</td>
+      <td><pre class='prettyprint covered' id='l20s0'>        IGestorProductes gm = FabricaGestorProductes.getInstance().fabrica();</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>21</td><td class='count'>5</td>
+      <td><pre class='prettyprint jmp'>        <span id='l21s0' title='Executions: 5' class='covered'>for(int i=0;i&lt;codisProducte.length;i++)</span> <span id='l21s1' title='Executions: 4' class='covered'>{</span></pre></td>
+    </tr>
+    <tr><td class='line'></td><td colspan='2'>&nbsp;</td></tr>
+    <tr>
+      <td class='line'>23</td><td class='count'>4</td>
+      <td><pre class='prettyprint covered' id='l23s0'>            int codi = codisProducte[i];</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>24</td><td class='count'>4</td>
+      <td><pre class='prettyprint covered' id='l24s0'>            int unitatsDemanades = unitatsProducte[i];</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>25</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>            try{</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>26</td><td class='count'>4</td>
+      <td><pre class='prettyprint covered' id='l26s0'>                String nom = gm.getNom(codi);</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>27</td><td class='count'>3</td>
+      <td><pre class='prettyprint covered' id='l27s0'>                int preu = gm.getPreu(codi);</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>28</td><td class='count'>3</td>
+      <td><pre class='prettyprint covered' id='l28s0'>                int unitatsStock = gm.getStock(codi);</pre></td>
+    </tr>
+    <tr><td class='line'></td><td colspan='2'>&nbsp;</td></tr>
+    <tr>
+      <td class='line'>30</td><td class='count'>3</td>
+      <td><pre class='prettyprint covered' id='l30s0'>                pressupost +=padRight(" * Producte "+ codi +"("+nom+" x "+unitatsDemanades+"u)", 30)+"- ";</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>31</td><td class='count'>3</td>
+      <td><pre class='prettyprint jmp'>                <span id='l31s0' title='Executions: 3' class='covered'>if(unitatsStock&lt;unitatsDemanades)</span> <span id='l31s1' title='Executions: 1' class='covered'>{</span></pre></td>
+    </tr>
+    <tr>
+      <td class='line'>32</td><td class='count'>1</td>
+      <td><pre class='prettyprint covered' id='l32s0'>                    pressupost +="Stock insuficient";</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>33</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>                } else {</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>34</td><td class='count'>2</td>
+      <td><pre class='prettyprint covered' id='l34s0'>                    pressupost += preu*unitatsDemanades+" €";</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>35</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>                }</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>36</td><td class='count'>1</td>
+      <td><pre class='prettyprint covered' id='l36s0'>            } catch(Exception e) {</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>37</td><td class='count'>1</td>
+      <td><pre class='prettyprint covered' id='l37s0'>                pressupost +=padRight(" * Producte "+ codi , 30)+"- ERROR 404 - Producte no existent";</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>38</td><td class='count'>3</td>
+      <td><pre class='prettyprint covered' id='l38s0'>            }</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>39</td><td class='count'>4</td>
+      <td><pre class='prettyprint covered' id='l39s0'>            pressupost +="\n";</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>40</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>        }</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>41</td><td class='count'>1</td>
+      <td><pre class='prettyprint covered' id='l41s0'>        return pressupost;</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>42</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>    }</pre></td>
+    </tr>
+    <tr><td class='line'></td><td colspan='2'>&nbsp;</td></tr>
+    <tr>
+      <td class='line'>44</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>    public static String padRight(String s, int n) {</pre></td>
+    </tr>
+    <tr>
+      <td class='line'>45</td><td class='count'>4</td>
+      <td><pre class='prettyprint covered' id='l45s0'>         return String.format("%1$-" + n + "s", s);  </pre></td>
+    </tr>
+    <tr>
+      <td class='line'>46</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>    }    </pre></td>
+    </tr>
+    <tr>
+      <td class='line'>47</td><td>&nbsp;</td>
+      <td><pre class='prettyprint'>}</pre></td>
+    </tr>
+  </table>
+</body>
+</html>
