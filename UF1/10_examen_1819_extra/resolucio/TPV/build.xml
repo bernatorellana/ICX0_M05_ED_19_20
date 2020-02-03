@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- You may freely edit this file. See commented blocks below for -->
+<!-- some examples of how to customize the build. -->
+<!-- (If you delete it and reopen the project it will be recreated.) -->
+<!-- By default, only the Clean and Build commands use this build script. -->
+<!-- Commands such as Run, Debug, and Test only use this build script if -->
+<!-- the Compile on Save feature is turned off for the project. -->
+<!-- You can turn off the Compile on Save (or Deploy on Save) setting -->
+<!-- in the project's Project Properties dialog box.-->
+<project name="TPV" default="default" basedir=".">
+    <description>Builds, tests, and runs the project TPV.</description>
+    <import file="nbproject/build-impl.xml"/>
+
+    <!-- necessari per poder fer el if i el foreach-->
+    <taskdef resource="net/sf/antcontrib/antcontrib.properties">
+        <classpath>
+            <pathelement location="lib/ant-contrib-1.0b3.jar"/>
+        </classpath>
+    </taskdef>    
+    <!-- ===============================================================-->
+    
+    <target name="-post-jar">
+        <jar file="${dist.jar}" update="true">
+            <zipgroupfileset dir="lib" includes="**/*.jar">                 
+            </zipgroupfileset>
+            <zipgroupfileset dir="../Barbecue/dist" includes="**/*.jar">                 
+            </zipgroupfileset>
+            <zipgroupfileset dir="../Barbecue/lib" includes="**/*.jar">                 
+            </zipgroupfileset>
+        </jar>
+    </target>
+    
+    
+    
+    <target name="0_ProcessarCodisDeBarres" depends="jar"
+    description="0_Processar">
+        <!--  a. [0.25p] Mostrar un <splash> amb un missatge  “Processant Barres” 
+            -->
+        <splash showduration="1000" displaytext="Processant Barres"></splash>
+        
+        <!--[0.25p]Assegurar que es faci el jar de l’aplicació. -->
+            <!-- afegim al target => depends="jar" -->
+         <!--
+        [0.25p]Es llegirà d’un arxiu de configuració
+            “configuration.ini” .
+            Aquest arxiu l’haureu de crear prèviament amb el Notepad, 
+            i hi posareu a dins una clau 
+            “BARCODE_TYPES”
+            amb el valor “EAN128, Code128, Code128A, Code128B, Code128C“ d-->                 
+        <property file="configuration.ini"></property>               
+        <echo message="${BARCODE_TYPES}"></echo>
+        <input validargs="${BARCODE_TYPES}" addproperty="barcode_type"></input>
+        <echo message="${barcode_type}"></echo>
+        <!--e) 0.25p]Demaneu a l’usuari el nom de la carpeta temporal on es faran les descàrregues (ruta relativa), per defecte ha de ser “Downloads”.-->
+        <input addproperty="downloads_folder" defaultvalue="Downloads"></input>
+        <echo message="${downloads_folder}"></echo>
+        <!-- f) Creeu la carpeta que ens ha indicat l’usuari al punt anterior. -->
+        <mkdir dir="${downloads_folder}"></mkdir>
+        <!-- g)  Descarregueu de la url http://10.132.0.0/provaED/ Un arxiu que s’anomeni 
+        “product_codes_YYYY_MM_DD.txt”, on YYYY indica l’any, MM el mes, i DD el dia actuals.-->
+        <tstamp>
+            <format property="avui" pattern="yyyy_MM_dd" />
+        </tstamp>
+        <echo message="${avui}"></echo>
+        <property name="filename" value="product_codes_${avui}.txt"></property>
+        <get src="http://10.132.0.0:81/provaED/${filename}"
+            dest="${downloads_folder}"
+        >
+        </get>
+        <!-- h) 
+            h. [0.25p]Demaneu a l’usuari que indiqui el nom de la carpeta 
+        de sortida ( on es deixaran els *.png resultants ) , per defecte ha de ser “Output”. -->
+        <input addproperty="output_folder" defaultvalue="Output"></input>
+        <!--i). [0.25p]Creeu la carpeta que ens ha indicat l’usuari al punt anterior.-->
+        <mkdir dir="${output_folder}"></mkdir>
+        <!--j) 
+            [1p]Executeu la classe fileprocessor.FileProcessor,
+            que serà responsable de llegir tots els codis dins de l’arxiu *.txt descarregat,
+            i crear arxius PNG amb els codis de barres a la carpeta de sortida indicada. 
+            Cal proporcionar dos paràmetres a l’execució:
+            a) La ruta relativa de l’arxiu descarregat
+            b) La ruta relativa de la carpeta de sortida
+            -->
+        <java 
+            classname="fileprocessor.FileProcessor"
+            classpath="${run.classpath}"
+        >
+            <arg value="${downloads_folder}/${filename}"></arg>
+            <arg value="${output_folder}"></arg>
+        </java>
+        
+        <!--
+        k) 1p] “Enzipeu” per separat cadascun dels PNG generats en el punt anterior. 
+            Useu la tasca <foreach> d’ant-contrib.
+         -->
+        <foreach target="enziparArxiu" param="arxiu">
+            <param name="output_folder" value="${output_folder}"></param>
+            <fileset dir="${output_folder}" includes="**\*.png"></fileset>
+        </foreach>
+        <!-- l)
+            [0.25p]Copieu els zips que s’han creat a la carpeta de sortida (la indicada en el punt h.) amb
+        el nom barcodes_YYYY_MM_DD.zip.-->
+        <zip destfile="${output_folder}/barcodes_${avui}.zip" 
+            basedir="${output_folder}"
+            excludes="barcodes_${avui}.zip"
+             includes="**\*.zip">        
+        </zip>
+        <!-- esborrem tots els zips i pngs originals-->
+        <delete dir="${output_folder}" includes="**/*.*" 
+                excludes="barcodes_${avui}.zip">
+        </delete>
+        <!-- m) esborrar la carpeta de descàrreges -->
+        <delete dir="${downloads_folder}"></delete>
+            
+    </target>
+    <target name="enziparArxiu" >
+        <echo message="====================="></echo>
+        <basename property="nom_base_arxiu" file="${arxiu}"
+          suffix=".png"/>
+          <echo message="${arxiu}"></echo>
+          <echo message="${nom_base_arxiu}"></echo>
+        <zip    destfile="${output_folder}/${nom_base_arxiu}.zip" 
+                basedir="${output_folder}" 
+                includes="${nom_base_arxiu}.png">
+        </zip>
+        
+    </target>
+    
+    
+    
+    
+    <!--
+
+    There exist several targets which are by default empty and which can be 
+    used for execution of your tasks. These targets are usually executed 
+    before and after some main targets. They are: 
+
+      -pre-init:                 called before initialization of project properties
+      -post-init:                called after initialization of project properties
+      -pre-compile:              called before javac compilation
+      -post-compile:             called after javac compilation
+      -pre-compile-single:       called before javac compilation of single file
+      -post-compile-single:      called after javac compilation of single file
+      -pre-compile-test:         called before javac compilation of JUnit tests
+      -post-compile-test:        called after javac compilation of JUnit tests
+      -pre-compile-test-single:  called before javac compilation of single JUnit test
+      -post-compile-test-single: called after javac compilation of single JUunit test
+      -pre-jar:                  called before JAR building
+      -post-jar:                 called after JAR building
+      -post-clean:               called after cleaning build products
+
+    (Targets beginning with '-' are not intended to be called on their own.)
+
+    Example of inserting an obfuscator after compilation could look like this:
+
+        <target name="-post-compile">
+            <obfuscate>
+                <fileset dir="${build.classes.dir}"/>
+            </obfuscate>
+        </target>
+
+    For list of available properties check the imported 
+    nbproject/build-impl.xml file. 
+
+
+    Another way to customize the build is by overriding existing main targets.
+    The targets of interest are: 
+
+      -init-macrodef-javac:     defines macro for javac compilation
+      -init-macrodef-junit:     defines macro for junit execution
+      -init-macrodef-debug:     defines macro for class debugging
+      -init-macrodef-java:      defines macro for class execution
+      -do-jar:                  JAR building
+      run:                      execution of project 
+      -javadoc-build:           Javadoc generation
+      test-report:              JUnit report generation
+
+    An example of overriding the target for project execution could look like this:
+
+        <target name="run" depends="TPV-impl.jar">
+            <exec dir="bin" executable="launcher.exe">
+                <arg file="${dist.jar}"/>
+            </exec>
+        </target>
+
+    Notice that the overridden target depends on the jar target and not only on 
+    the compile target as the regular run target does. Again, for a list of available 
+    properties which you can use, check the target you are overriding in the
+    nbproject/build-impl.xml file. 
+
+    -->
+</project>
