@@ -4,6 +4,7 @@ import java.util.HashMap;
 import mockit.Mock;
 import mockit.MockUp;
 import mockit.Mocked;
+import mockit.NonStrictExpectations;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -15,11 +16,14 @@ public class LectorTest {
     /**
      * Test of extreuParaulesAmbDefinicio method, of class Lector.
      */
+    
+    @Mocked DiccionariOnline don;
+    
     @Test
     public void testInformeText() {
 
         //FabricaDiccionari.setMode(false);
-        new MockUp<DiccionariOnline>() {
+        /*new MockUp<DiccionariOnline>() {
 
             @Mock
             public String getDescripcio(String paraula) {
@@ -48,7 +52,27 @@ public class LectorTest {
                 return tipus.get(paraula);
             }
 
-        };
+        };*/
+        
+        new NonStrictExpectations(){{
+            /*
+            don.getDescripcio(anyString); returns ("mamifer cannid","mamifer feli", "llar dolça llar");
+            don.getTipusParaula(anyString); returns (TipusParaula.ARTICLE, 
+                    TipusParaula.NOM, TipusParaula.CONJUNCIO, TipusParaula.ARTICLE,
+                    TipusParaula.NOM, TipusParaula.VERB, TipusParaula.CONJUNCIO, TipusParaula.NOM
+                    );
+                */
+            don.getDescripcio("gos"); result="mamifer cannid";
+            don.getDescripcio("gat"); result="mamifer feli";
+            don.getDescripcio("casa"); result="llar dolça llar";//result = new Exception();
+            don.getTipusParaula("gos"); result = TipusParaula.NOM;
+            don.getTipusParaula("gat"); result = TipusParaula.NOM;
+            don.getTipusParaula("casa"); result = TipusParaula.NOM;
+            don.getTipusParaula(anyString); result = TipusParaula.CONJUNCIO;
+            
+        }};
+        
+        //-----------------------------------------------------------------
 
         Lector l = new Lector();
         String informeObtingut = l.extreuParaulesAmbDefinicio("El gos i el gat viuen a casa");
