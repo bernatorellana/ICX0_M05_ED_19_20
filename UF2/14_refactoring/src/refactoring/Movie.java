@@ -5,7 +5,7 @@ package refactoring;
 public class Movie {
 
     private String _title;
-    private TipusTarifa _priceCode;
+    private TipusTarifa _tipusTarifa;
     private TarifaMovie _tarifa;
 
     public Movie(String title, TipusTarifa tarifa) {
@@ -14,16 +14,12 @@ public class Movie {
     }
 
     public TipusTarifa getPriceCode() {
-        return _priceCode;
+        return _tipusTarifa;
     }
 
-    public void setPriceCode(TipusTarifa tarifa) {
-        _priceCode = tarifa;
-        switch(tarifa) {            
-            case CHILDRENS:     _tarifa = new TarifaMovieChildren(); break;
-            case NEW_RELEASE:   _tarifa = new TarifaMovieNewRelease(); break;
-            case REGULAR:       _tarifa = new TarifaMovieRegular(); break;            
-        }      
+    public void setPriceCode(TipusTarifa tipusTarifa) {
+        _tipusTarifa = tipusTarifa;
+        _tarifa = tipusTarifa.getTarificador();
     }
 
     public String getTitle() {
@@ -32,6 +28,5 @@ public class Movie {
 
     double getPrice(int daysRented) {
         return _tarifa.getPrice(daysRented);
-    }
- 
+    } 
 }

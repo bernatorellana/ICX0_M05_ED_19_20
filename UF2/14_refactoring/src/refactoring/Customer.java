@@ -23,15 +23,8 @@ public class Customer {
     }
 
     public String statement() {
-        String result = "Rental Record for " + getName() + "\n";
-        for (Rental rental : _rentals) {
-            // show figures for this rental
-            result += "\t" + rental.getMovie().getTitle() + "\t" + String.valueOf(rental.getAmount()) + "\n";
-        }
-        // add footer lines
-        result += "Amount owed is " + String.valueOf(getOwedAmount()) + "\n";
-        result += "You earned " + String.valueOf(getFrequentRenterPoints()) + " frequent renter points";
-        return result;
+        StatementReportTxt report = new StatementReportTxt();
+        return report.getReport(this);        
     }
     
     public double getOwedAmount(){
@@ -47,6 +40,10 @@ public class Customer {
             frequentRenterPoints += rental.getFrequentRenterPoints();           
         }
         return frequentRenterPoints;
+    }
+
+    Iterable<Rental> getRentals() {
+        return _rentals;
     }
     
 }
