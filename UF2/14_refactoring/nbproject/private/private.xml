@@ -4,13 +4,18 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/E:/Docencia/Material_Moduls/M5_ED/repoGit/ICX0_M05_ED_19_20/UF2/14_refactoring/src/refactoring/MovieNewRelease.java</file>
-            <file>file:/E:/Docencia/Material_Moduls/M5_ED/repoGit/ICX0_M05_ED_19_20/UF2/14_refactoring/src/refactoring/MovieRegular.java</file>
-            <file>file:/E:/Docencia/Material_Moduls/M5_ED/repoGit/ICX0_M05_ED_19_20/UF2/14_refactoring/src/refactoring/Movie.java</file>
-            <file>file:/E:/Docencia/Material_Moduls/M5_ED/repoGit/ICX0_M05_ED_19_20/UF2/14_refactoring/src/refactoring/Customer.java</file>
-            <file>file:/E:/Docencia/Material_Moduls/M5_ED/repoGit/ICX0_M05_ED_19_20/UF2/14_refactoring/src/refactoring/MovieChildren.java</file>
-            <file>file:/E:/Docencia/Material_Moduls/M5_ED/repoGit/ICX0_M05_ED_19_20/UF2/14_refactoring/test/refactoring/CustomerTest.java</file>
-            <file>file:/E:/Docencia/Material_Moduls/M5_ED/repoGit/ICX0_M05_ED_19_20/UF2/14_refactoring/src/refactoring/Rental.java</file>
+            <file>file:/H:/Docencia/Material_Moduls/M5_ED/repoGit/ICX0_M05_ED_19_20/UF2/14_refactoring/src/refactoring/TarifaMovieNewRelease.java</file>
+            <file>file:/H:/Docencia/Material_Moduls/M5_ED/repoGit/ICX0_M05_ED_19_20/UF2/14_refactoring/src/refactoring/Movie.java</file>
+            <file>file:/H:/Docencia/Material_Moduls/M5_ED/repoGit/ICX0_M05_ED_19_20/UF2/14_refactoring/src/refactoring/TarifaMovie.java</file>
+            <file>file:/H:/Docencia/Material_Moduls/M5_ED/repoGit/ICX0_M05_ED_19_20/UF2/14_refactoring/src/refactoring/TarifaMovieRegular.java</file>
+            <file>file:/H:/Docencia/Material_Moduls/M5_ED/repoGit/ICX0_M05_ED_19_20/UF2/14_refactoring/test/refactoring/CustomerTest.java</file>
+            <file>file:/H:/Docencia/Material_Moduls/M5_ED/repoGit/ICX0_M05_ED_19_20/UF2/14_refactoring/src/refactoring/StatementReport.java</file>
+            <file>file:/H:/Docencia/Material_Moduls/M5_ED/repoGit/ICX0_M05_ED_19_20/UF2/14_refactoring/src/refactoring/Rental.java</file>
+            <file>file:/H:/Docencia/Material_Moduls/M5_ED/repoGit/ICX0_M05_ED_19_20/UF2/14_refactoring/src/refactoring/StatementReportTxt.java</file>
+            <file>file:/H:/Docencia/Material_Moduls/M5_ED/repoGit/ICX0_M05_ED_19_20/UF2/14_refactoring/src/refactoring/TipusTarifa.java</file>
+            <file>file:/H:/Docencia/Material_Moduls/M5_ED/repoGit/ICX0_M05_ED_19_20/UF2/14_refactoring/src/refactoring/TarifaMovieChildren.java</file>
+            <file>file:/H:/Docencia/Material_Moduls/M5_ED/repoGit/ICX0_M05_ED_19_20/UF2/14_refactoring/src/refactoring/StatementReportHTML.java</file>
+            <file>file:/H:/Docencia/Material_Moduls/M5_ED/repoGit/ICX0_M05_ED_19_20/UF2/14_refactoring/src/refactoring/Customer.java</file>
         </group>
     </open-files>
 </project-private>
