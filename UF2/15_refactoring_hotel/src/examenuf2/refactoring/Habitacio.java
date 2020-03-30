@@ -4,16 +4,16 @@ package examenuf2.refactoring;
  *
  * @author bernat
  */
-public class Habitacio {
+public abstract class Habitacio {
 
-    public static final int DOBLE = 0;
-    public static final int TRIPLE = 1;
-    public static final int SUITE = 2;
-
+//    public static final int DOBLE = 0;
+//    public static final int TRIPLE = 1;
+//    public static final int SUITE = 2;
+//
     private int codi;
-    private int tipusHabitacio;
+    private EnumTipusHabitacio tipusHabitacio;
 
-    public Habitacio(int codi, int tipusHabitacio) {
+    public Habitacio(int codi, EnumTipusHabitacio tipusHabitacio) {
         this.codi = codi;
         this.tipusHabitacio = tipusHabitacio;
     }
@@ -22,44 +22,15 @@ public class Habitacio {
         return codi;
     }
 
-    public int getTipusHabitacio() {
+    public EnumTipusHabitacio getTipusHabitacio() {
         return tipusHabitacio;
     }
+    
+    abstract int getPreu();
+    
+    abstract double getRecarrecIndividual();
 
-    int getPreu() {
-        switch (tipusHabitacio) {
-            case DOBLE:
-                return 85;
-            case TRIPLE:
-                return 120;
-            case SUITE:
-                return 600;
-        }
-        throw new RuntimeException("Tipus d'habitació no v?lid");
-    }
+    abstract String getDescTipus();
 
-    double getRecarrecIndividual() {
-        switch (tipusHabitacio) {
-            case DOBLE:
-                return 50;
-            case TRIPLE:
-                return 80;
-            case SUITE:
-                return 0;
-        }
-        throw new RuntimeException("Tipus d'habitació no v?lid");
-    }
-
-    String getDescTipus() {
-        String tipusHab = "";
-        if (getTipusHabitacio() == Habitacio.DOBLE) {
-            tipusHab = "doble";
-        } else if (getTipusHabitacio() == Habitacio.TRIPLE) {
-            tipusHab = "triple";
-        } else {
-            tipusHab = "suite";
-        }
-        return tipusHab;
-    }
 
 }

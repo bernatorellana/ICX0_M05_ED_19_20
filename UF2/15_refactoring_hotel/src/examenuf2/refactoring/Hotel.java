@@ -4,7 +4,9 @@ package examenuf2.refactoring;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.lang.Double;
 
 /**
  *
@@ -21,38 +23,45 @@ public class Hotel {
     
     public String getFacturacio(){
         
-        double totalImports=0;
-        double totalDobles=0, totalTriples=0, totalSuites=0;
-        double preu=0;
+        
         StringBuilder sb = new StringBuilder();
         sb.append("> Facturació pendent: \n");
-
-        for(Estansa e: mEstancesActuals) {
-           
-           preu = e.getPreu();
-                       
-            if(e.getHabitacio().getTipusHabitacio()==Habitacio.DOBLE) {              
-                totalDobles+= preu;                
-            } else if(e.getHabitacio().getTipusHabitacio()==Habitacio.TRIPLE) {              
-                totalTriples+= preu;                  
-            } else {               
-                totalSuites+= preu;                  
-            }   
-            sb.append("\t-"+e.getHabitacio().getCodi()+":("+e.getHabitacio().getDescTipus()+"+"+e.getRegim().getId()+"),\t nits d'estança:"+e.getNits()+",\t preu total "+preu+"€ \n");
-            
-            totalImports+=preu;
+        for(Estansa e: mEstancesActuals) {           
+           sb.append("\t-"+e.getHabitacio().getCodi()+":("+e.getHabitacio().getDescTipus()+"+"+e.getRegim().getId()+"),\t nits d'estança:"+e.getNits()+",\t preu total "+e.getPreu()+"€ \n");           
         }
-        sb.append("=========================================================\n");        
-        sb.append(" Total dobles:\t"+totalDobles+"€ \n");    
-        sb.append(" Total triples:\t"+totalTriples+"€ \n");    
-        sb.append(" Total suites:\t"+totalSuites+"€ \n");    
-        sb.append("=========================================================\n");        
-        sb.append(" Total:\t"+totalImports+"€ \n");    
-        sb.append("=========================================================\n");        
-
+        dibuixaLinia(sb);     
+        EnumTipusHabitacio tipus[] = EnumTipusHabitacio.values();
+        for(int i=0;i<tipus.length;i++) {
+            sb.append(" Total "+tipus[i].getDescPlural()+":\t"+getTotalImports(tipus[i])+"€ \n");    
+        }
+        dibuixaLinia(sb);        
+        sb.append(" Total:\t"+getTotalImports()+"€ \n");    
+        dibuixaLinia(sb);        
         
         return sb.toString();
+    }    
+
+    private void dibuixaLinia(StringBuilder sb) {
+        sb.append("=========================================================\n");
     }
+    
+    public double getTotalImports(){                
+        return getTotalImports(null);                
+    }        
+
+    public double getTotalImports(EnumTipusHabitacio tipus){       
+        double totalImports=0;                
+        for(Estansa e: mEstancesActuals) {
+           
+            if(tipus==null || e.getHabitacio().getTipusHabitacio()==tipus) {
+                totalImports+= e.getPreu();
+            } 
+        }
+        return totalImports;
+    }    
+    
+    
+    
     
     public static int nitsDiferencia( Date a, Date b) {
         Calendar cala = Calendar.getInstance();

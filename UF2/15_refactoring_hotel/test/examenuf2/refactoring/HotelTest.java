@@ -31,12 +31,12 @@ public class HotelTest {
     public void testGetFacturacio() {
         
         Hotel nh = new Hotel();
-        nh.addEstansa(new Estansa(new Habitacio(666,Habitacio.DOBLE),new Date(2018,3,25), new Date(2018,3,28),2, RegimEnum.MITJA_PENSIO));
-        nh.addEstansa(new Estansa(new Habitacio(333,Habitacio.TRIPLE),new Date(2018,3,10), new Date(2018,3,11),2, RegimEnum.PENSIO_COMPLETA));
-        nh.addEstansa(new Estansa(new Habitacio(601,Habitacio.DOBLE),new Date(2018,3,25), new Date(2018,3,28),1, RegimEnum.NOMES_ALLOTJAMENT));
-        nh.addEstansa(new Estansa(new Habitacio(100,Habitacio.SUITE),new Date(2018,3,26), new Date(2018,3,27),1, RegimEnum.PENSIO_COMPLETA));
-        nh.addEstansa(new Estansa(new Habitacio(301,Habitacio.TRIPLE),new Date(2018,3,25), new Date(2018,3,28),1, RegimEnum.ESMORCAR));
-        nh.addEstansa(new Estansa(new Habitacio(303,Habitacio.TRIPLE),new Date(2018,3,23), new Date(2018,3,29),3, RegimEnum.ESMORCAR));
+        nh.addEstansa(new Estansa(new HabitacioDoble(666),new Date(2018,3,25), new Date(2018,3,28),2, RegimEnum.MITJA_PENSIO));
+        nh.addEstansa(new Estansa(new HabitacioTriple(333),new Date(2018,3,10), new Date(2018,3,11),2, RegimEnum.PENSIO_COMPLETA));
+        nh.addEstansa(new Estansa(new HabitacioDoble(601),new Date(2018,3,25), new Date(2018,3,28),1, RegimEnum.NOMES_ALLOTJAMENT));
+        nh.addEstansa(new Estansa(new HabitacioSuite(100),new Date(2018,3,26), new Date(2018,3,27),1, RegimEnum.PENSIO_COMPLETA));
+        nh.addEstansa(new Estansa(new HabitacioTriple(301),new Date(2018,3,25), new Date(2018,3,28),1, RegimEnum.ESMORCAR));
+        nh.addEstansa(new Estansa(new HabitacioTriple(303),new Date(2018,3,23), new Date(2018,3,29),3, RegimEnum.ESMORCAR));
         
         String facturacio = nh.getFacturacio();
         System.out.println(""+facturacio+".");
